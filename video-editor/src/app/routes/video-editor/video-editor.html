@@ -1,0 +1,9 @@
+<div class="preview">
+  <button (click)="togglePlay()">
+    {{ (videoService.isPlaying$ | async) ? 'Pause' : 'Play' }}
+  </button>
+  <span>
+    {{ (videoService.currentTime$ | async) }}/
+    {{ (videoService.totalDuration$ | async) }}
+  </span>
+</div>
