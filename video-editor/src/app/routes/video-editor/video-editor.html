@@ -2,12 +2,13 @@
   <div class="video-wrapper" >
     <canvas #videoSpace id="video-space" width="600"  height="300"></canvas>
   </div>
-  <button (click)="togglePlay()">
-    Play
-    <!-- {{ (videoService.isPlaying$) ? 'Pause' : 'Play' }} -->
-  </button>
-  <span>
-    <!-- {{ (videoService.currentTime$) }}/ -->
-    <!-- {{ (videoService.totalDuration$) }} -->
-  </span>
+  <input
+    #fileInput
+    type="file"
+    (change)="onFileSelected($event)"
+    accept="video/mp4"
+  />
+  <!-- <button (click)="togglePlay()"> -->
+  <!--   Play -->
+  <!-- </button> -->
 </div>
