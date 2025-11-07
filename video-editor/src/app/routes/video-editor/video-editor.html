@@ -1,9 +1,13 @@
 <div class="preview">
+  <div class="video-wrapper" >
+    <canvas #videoSpace id="video-space" width="600"  height="300"></canvas>
+  </div>
   <button (click)="togglePlay()">
-    {{ (videoService.isPlaying$ | async) ? 'Pause' : 'Play' }}
+    Play
+    <!-- {{ (videoService.isPlaying$) ? 'Pause' : 'Play' }} -->
   </button>
   <span>
-    {{ (videoService.currentTime$ | async) }}/
-    {{ (videoService.totalDuration$ | async) }}
+    <!-- {{ (videoService.currentTime$) }}/ -->
+    <!-- {{ (videoService.totalDuration$) }} -->
   </span>
 </div>

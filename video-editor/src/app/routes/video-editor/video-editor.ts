@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { afterNextRender, Component, effect, ElementRef, inject, Signal, viewChild } from '@angular/core';
 import { Video } from '../../services/video';
+// import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'bt-video-editor',
@@ -9,6 +10,45 @@ import { Video } from '../../services/video';
 })
 export class VideoEditor {
   videoService: Video = inject(Video);
+
+  canvas: Signal<ElementRef<HTMLCanvasElement> | undefined> = viewChild<ElementRef<HTMLCanvasElement>>('videoSpace');
+  private ctx: CanvasRenderingContext2D | null = null;
+
+  constructor() {
+    afterNextRender(() => {
+      const canvasEl = this.canvas();
+
+      if (canvasEl) {
+        this.ctx = canvasEl.nativeElement.getContext('2d');
+
+        if (!this.ctx) {
+          console.error("Faield to get 2D context")
+          return;
+        }
+
+        this.draw();
+      }
+    })
+  }
+
+
+  private draw(): void {
+    if (!this.ctx) return;
+
+
+    // Clear the canvas
+    this.ctx.clearRect(0, 0, 600, 300);
+
+
+    // Draw a simple red rectangle
+    this.ctx.fillStyle = '#0000FF';
+    this.ctx.fillRect(10, 10, 150, 100);
+
+    // Draw a simple red rectangle
+    this.ctx.fillStyle = '#FF0000'
+    this.ctx.font = '30px Arial';
+    this.ctx.fillText('Hello from Modern Angular!', 10, 200);
+  }
 
   togglePlay(): void {
     if (this.videoService.isPlaying$()) {

@@ -1,6 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Clip } from '../models/video.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -24,14 +25,7 @@ export class Video {
 
   // Methods
   addClip(clip: Clip): void {
-    const _clip: Clip = {
-      id: uuidv4(),
-      file,
-      startTime,
-      endTime: startTime + video.duration,
-      duration: video.duration,
-      effects: []
-    };
+    let _clip: Clip;
 
     this.clips.update(clips => [...clips, clip]);
   }
